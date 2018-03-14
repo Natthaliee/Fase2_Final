@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<link href="/css/bootstrap.css" rel="stylesheet" />
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/Scripts/toastr.js"></script>
+<link href="/Content/toastr.css" rel="stylesheet" />
 <h2>Index</h2>
 
 <p>
@@ -17,17 +20,18 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.JornadaNombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.JornadaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.JornadaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.JornadaId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JornadaNombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.JornadaId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.JornadaId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.JornadaId })
+            </td>
+        </tr>
+    }
 
 </table>

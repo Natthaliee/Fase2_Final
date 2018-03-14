@@ -6,8 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-//CONTROLERS 
-
 namespace EscuelaDeCienciasEconomicas.Controllers
 {
     public class HomeController : Controller

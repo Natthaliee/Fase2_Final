@@ -24,6 +24,7 @@ namespace SistemaEconomicas_V1.Controllers
             TempData["MsgTitle"] = "";
             TempData["MsgErr"] = "";
             TempData["Msg"] = "";
+            Session["Rolesss"] = "";
 
             var value2 = Request["PassId"];
             bool flagLogin = false;
@@ -38,21 +39,34 @@ namespace SistemaEconomicas_V1.Controllers
                 }
                 else
                 {
-                    Usuario usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 1).SingleOrDefault();
-                    //string hashPass = TestContext.Base64Encode(PassId);   
-                    if (usr == null)
-                        {
-                            TempData["MsgErr"] = "El nombre de usuario o contraseña no son válidos";
-                        }
-                    //else if (!usr.UserPass.Equals(hashPass))
-                    //    {
-                    //    TempData["MsgErr"] = "El nombre de usuario o contraseña no son válidos";
-                    //    }
-                    else
-                        {
+                    Usuario usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 1).SingleOrDefault();                    
+                    if (usr == null) {
+                        Session["Rolesss"] = "";
+                        usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 2).SingleOrDefault();                        
+                            if (usr == null)
+                            {
+                                Session["Rolesss"] = "";
+                                usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 3).SingleOrDefault();                                
+                                    if (usr == null)
+                                    {
+                                    TempData["MsgErr"] = "El nombre de usuario o contraseña no son válidos";
+                                    }
+                                    else
+                                    {
+                                        Session["Rolesss"] = "Catedratico";
+                                         flagLogin = true;
+                            }
+                            }
+                            else
+                            {
+                            Session["Rolesss"] = "Administrador";
                             flagLogin = true;
-                            
                         }
+                    }
+                    else{
+                        Session["Rolesss"] = "Estudiante";
+                        flagLogin = true;
+                    }
                 }
                
                 PassId = "";

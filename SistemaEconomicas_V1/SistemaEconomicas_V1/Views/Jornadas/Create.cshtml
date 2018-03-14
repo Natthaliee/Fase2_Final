@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "Create";
 }
-
+<link href="/css/bootstrap.css" rel="stylesheet" />
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/Scripts/toastr.js"></script>
+<link href="/Content/toastr.css" rel="stylesheet" />
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Jornada</h4>
         <hr />

@@ -9,6 +9,7 @@
 <script src="/Scripts/toastr.js"></script>
 <link href="/Content/toastr.css" rel="stylesheet" />
 
+
 <h2>Index</h2>
 
 <p>
@@ -70,6 +71,33 @@
 </table>
 
 <div>
-    @Html.ActionLink("Cerrar Sesion", "Index","Login")
+    <p>
+
+        <br><br>
+        @if (Session["Rolesss"] == "Administrador")
+    {
+        @Html.ActionLink("Roles", "Index", "Rols")
+        <br>
+        @Html.ActionLink("Carreras", "Index", "Rols")
+        <br>
+        @Html.ActionLink("Jornadas", "Index", "Rols")
+}
+else if (Session["Rolesss"] == "Catedratico")
+{
+    @Html.ActionLink("Jornadas", "Index", "Rols")
+    <br>
+    @Html.ActionLink("Carreras", "Index", "Rols")
+    <br>
+
+}
+else
+{
+    @Html.ActionLink("Jornadas", "Index", "Rols")
+}
+
+        <br>
+        @Html.ActionLink("Cerrar Sesion", "Index", "Login")
+    </p>
+
 </div>
 
