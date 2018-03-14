@@ -1,0 +1,126 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{ Layout = null; }
+@{
+    ViewBag.ContentTitle = "";
+    ViewBag.SectionTitle = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    @{
+        ViewBag.PageTitle = "Facultad de Ciencias Economicas";
+    }
+
+    <title>@ViewBag.PageTitle</title>
+
+    @*@Styles.Render("~/css/css")
+
+    @Scripts.Render("~/bundles/jquery")*@
+
+</head>
+<body>
+
+    <!-- START TOP BAR -->
+    <div class="page-topbar">
+
+        <!-- START LOGO AREA -->
+        <div class="logo-area">
+            <!-- table border="0" cellspacing="0" cellpadding="0" width="260">
+                <tr>
+                    <td width="100%" align="center" valign="middle">
+                        <img src="~/Images/Enel_logo_2016.png" height="36" alt="ENEL" title="" />
+                    </td>
+                </tr>
+            </table -->
+        </div>
+        <!-- END LOGO AREA -->
+
+        <!-- START QUICK AREA -->
+        <div class="quick-area">
+            <!-- START PULL LEFT -->
+            <div class="pull-left">
+                
+            </div>
+            <!-- END PULL LEFT -->
+
+            <!-- START PULL RIGHT -->
+            <div class="pull-right">
+                <ul class="info-menu right-links list-inline list-unstyled">
+
+                    <li>
+                        <i class="fa fa-calendar" style="color: red;"></i>
+                        <span style="margin-left: 5px; margin-right5px;">
+                            @DateTime.Now.ToString("dd/MM/yyyy hh:mm")
+                        </span>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-info" style="color: orange;"></i>
+                            <span style="margin-left: 5px; margin-right5px;">Acerca de</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-sign-out icon-success"></i>
+                            <span style="margin-left: 5px; margin-right5px;">Salir</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- END PULL RIGHT -->
+        </div>
+        <!-- END QUICK AREA -->
+
+    </div>
+    <!-- END TOP BAR -->
+
+    <!-- START CONTAINER -->
+    <div class="page-container row-fluid container-fluid">
+
+        <!-- START CONTENT -->
+        <section id="content" class="">
+            <section class="wrapper main-wrapper row">
+
+                    <div class="col-xs-12">
+                        <br /><br />
+                        <h1 class="page_error_info text-primary" style="color: #3F51B5; font-size: 150px;">
+                            <i class="fa fa-frown-o"></i>
+                        </h1>
+                        <!--<h1 class="page_error_info text-primary" style="color: #3F51B5; font-size: 90px;">404</h1>-->
+                        <div class="row">
+                            <p class="page_error_info" style="font-size: 20px; margin-top: 0px;">
+                                @(new HtmlString(TempData["MsgErr"] as string))
+                            </p>
+                            <br />
+                            <div class="col-md-offset-3 col-sm-offset-3 col-xs-offset-2 col-xs-8 col-sm-6">
+                                <form action="javascript:;" method="post" class="">
+                                    <div class="text-center">
+                                        <a class="btn btn-primary btn-lg" href="@Url.Action("Index","Home")"><i class="fa fa-home"></i> &nbsp; Ir a Inicio</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <br /><br />
+
+                    </div>
+
+            </section>
+        </section>
+        <!-- END CONTENT -->
+
+    </div>
+    <!-- END CONTAINER -->
+
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+
+    <!-- RenderSection("scripts", required: false) -->
+
+</body>
+</html>

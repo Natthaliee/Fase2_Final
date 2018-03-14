@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ModelBD.Usuario>
+
+@{
+    ViewBag.Title = "Modulo de Usuarios";
+}
+
+<link href="/css/bootstrap.css" rel="stylesheet" />
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/Scripts/toastr.js"></script>
+<link href="/Content/toastr.css" rel="stylesheet" />
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo Usuario", "Create")
+</p>
+
+<table class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="666633" background="green" style="padding-top: 2%; text-align:center">
+    <tr>
+        <th>
+            NOMBRE CARRERA
+        </th>
+        <th>
+            NOMBRE JORNADA
+        </th>
+        <th>
+            ROL
+        </th>
+        <th>
+            NOMBRE USUARIO
+        </th>
+        <th>
+            PASSWORD
+        </th>
+        <th>
+            FECHA DE CREACIÓN
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Carrera.CarreraNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jornada.JornadaNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol.RolNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserPass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Cerrar Sesion", "Index","Login")
+</div>
+

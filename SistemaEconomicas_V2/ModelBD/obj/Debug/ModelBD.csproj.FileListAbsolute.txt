@@ -1,0 +1,12 @@
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\ModelBD.dll.config
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\ModelBD.dll
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\ModelBD.pdb
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\EntityFramework.dll
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\EntityFramework.xml
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\obj\Debug\ModelBD.csprojResolveAssemblyReference.cache
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\obj\Debug\ModelBD.csproj.CoreCompileInputs.cache
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\obj\Debug\ModelBD.csproj.CopyComplete
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\obj\Debug\ModelBD.dll
+C:\Users\Jose Batz\Source\Repos\SistemaEconomicas_V2\ModelBD\obj\Debug\ModelBD.pdb

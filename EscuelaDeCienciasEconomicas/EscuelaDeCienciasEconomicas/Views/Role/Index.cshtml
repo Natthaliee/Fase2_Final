@@ -1,0 +1,87 @@
+﻿@using GridMvc.Html
+@using RaptorENEL_V._1._0.DAL
+@using RaptorENEL_V._1._0.ActionFilters
+@model IEnumerable<RaptorENEL_V._1._0.Models.Role>
+
+@{
+    ViewBag.ContentTitle = "ROLES";
+    ViewBag.SectionTitle = "LISTADO DE ROLES";
+    ViewBag.breadcrumblist = "<li><a href='/Role'><i class='fa fa-users' style='color: dodgerblue;'></i> Roles</a></li>";
+    ViewBag.mnOptID = "optRoles";
+    RBACUser session = RaptorAppContext.getSessionObj(RaptorAppContext.SESSION_USER_OBJ) as RBACUser;
+}
+
+<div class="dataTables_wrapper form-inline no-footer">
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div style="float: right;">
+                @using (Html.BeginForm("Index", "Role", FormMethod.Post, new { @class = "show_modal", id = "pgForm", name = "pgForm" }))
+                {
+                    @Html.Partial("Pagination")
+                }
+            </div>
+            <div style="float: right;">
+            @{
+                if (session.permissionList.Any(c => c.Controller == "Role" && c.Action == "Create"))
+                {
+                <a class="btn btn-primary btn-icon bottom15 right15 show_modal" href="@Url.Action("Create", "Role")">
+                    <span class="title"> Agregar </span>
+                    <i class="fa fa-plus"></i>
+                </a>
+                }
+            }
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="content">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        //columns.Add(c => c.id).Titled("Id");
+        columns.Add(c => c.name).Titled("Rol").Filterable(true);
+        columns.Add(c => c.description).Titled("Descripción");
+        columns.Add(c => c.isAdmin).Titled("Es Admin")
+                .Css("text-center")
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(c => c.isAdmin ? @"<i class='fa fa-check-square icon-success'></i>" : @"<i class='fa fa-check-square icon-secondary'></i>")
+                .SetWidth("8%");
+        if (session.permissionList.Any(c => c.Controller == "Role" && c.Action == "Edit"))
+        {
+        columns.Add().Titled("Editar")
+                .Css("text-center")
+                .Filterable(true)
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(c => @"<a class='btn-icon show_modal' href='Role/Edit/" + c.id + @"'>  <i class='fa fa-pencil-square-o icon-info'></i></a>")
+                .SetWidth("8%");
+        }
+        if (session.permissionList.Any(c => c.Controller == "Role" && c.Action == "Delete"))
+        {
+        columns.Add().Titled("Eliminar")
+                .Css("text-center")
+                .Filterable(true)
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(c => @"<a class='btn-icon show_modal' href='Role/Delete/" + c.id + @"'>  <i class='fa fa-trash-o icon-accent'></i></a>")
+                .SetWidth("8%");
+        }
+}).WithPaging(int.Parse(@Session["Paginacion"].ToString())).Sortable(true)
+    </div>
+</div>
+
+<script>
+    $(function(){
+        var msg = "@(TempData["Msg"] as string)";
+        if (msg !== "") {
+            toastr.success(msg);
+        }
+    });
+    function SelectedIndexChanged() {
+        $('#modal_loading').show();
+        //Form post
+        document.pgForm.submit();
+    }
+</script>
+

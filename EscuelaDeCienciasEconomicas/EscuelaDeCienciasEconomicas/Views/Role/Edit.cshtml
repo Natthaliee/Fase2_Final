@@ -1,0 +1,205 @@
+﻿@model RaptorENEL_V._1._0.Models.Role
+
+@{
+    ViewBag.ContentTitle = "ROLES";
+    ViewBag.SectionTitle = "EDITAR INFORMACIÓN DE ROL";
+    ViewBag.breadcrumblist = "<li><a href='/Role'><i class='fa fa-users' style='color: dodgerblue;'></i> Roles</a></li><li><a href='#'><i class='fa fa-pencil' style='color: dodgerblue;'></i> Editar</a></li>";
+    ViewBag.mnOptID = "optRoles";
+}
+
+<style>
+    #divFlechas {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+@using (Html.BeginForm("Edit", "Role", FormMethod.Post, new { @class = "show_modal", id = "form", name = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-users" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de rol" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger col-md-10" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-info" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripción de rol" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger col-md-12" })
+        </div>
+
+        <h4>Permisos</h4>
+        <hr class="division" width="25%" />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Permisos</label>
+            <div class="col-md-3">
+                Permisos disponibles
+                @Html.ListBox("permission_id", null, new { @style = "width:100%;  font-size:70%", @size = 15, htmlAttributes = new { @class = "form-control" } })
+                <br />
+                <div style="text-align:center;">
+                    <button type="button" id="btnAddAll" class="btn btn-icon btn-sm">
+                        <span>Agregar todos</span>  &nbsp;  <i class="fa fa-arrow-circle-right fa-3"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="divFlechas" class="col-md-2" style="left:-2%;">
+                <table id="tabla">
+                    <tr>
+                        <td>
+                            <button id="btnAdd" type="button" class="btn btn-info btn-icon">
+                                <i class="fa fa-arrow-right fa-3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="btnDelete" type="button" class="btn btn-info btn-icon">
+                                <i class="fa fa-arrow-left fa-3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3" style="left:-6%;">
+                Permisos elegidos
+                @Html.ListBox("permissions", null, new { @name = "permissions", @style = "width:100%;font-size:70%", @size = 14, htmlAttributes = new { @class = "selectpicker form-control" } })
+
+                <div style="padding-top: 2%; text-align:center">
+                    <button type="button" id="btnDeleteAll" class="btn btn-icon btn-sm">
+                        <i class="fa fa-arrow-circle-left fa-3"></i> &nbsp; <span>Eliminar todos</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isAdmin)
+                </div>
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.isAdmin, "", new { @class = "col-md-10 text-danger" })
+            <span class="col-md-2"></span>
+            <span class="col-md-10 desc">Indica si el rol es de tipo administrador.</span>
+        </div>
+
+        <hr class="division" style="margin-bottom: 15px;" width="100%" />
+
+        <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+            <div class="text-left">
+                <a class="btn btn-secondary btn-icon bottom15 right15 show_modal" href="@Url.Action("Index","Role")">
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="title">Regresar</span>
+                </a>
+
+                <button type="submit" id="guardar" class="btn btn-info btn-icon bottom15 right15">
+                    <i class="fa fa-floppy-o"></i> &nbsp; <span>Guardar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function(){
+        var msg = "@(TempData["Msg"] as string)";
+        var msgErr = "@(TempData["MsgErr"] as string)";
+        if (msg !== "") {
+            toastr.success(msg);
+        }
+        if (msgErr !== "") {
+            toastr.error(msgErr);
+        }
+    });
+    $("#btnAddAll").click(function () {
+        $("#permission_id > option").each(function () {
+            $('#permissions')
+                .append($("<option></option>")
+                .attr("value", this.value)
+                .text(this.text));
+            $(this).remove();
+        });
+        ordernarPermisos();
+    });
+    $("#btnAdd").click(function () {
+        $("#permission_id > option:selected").each(function () {
+            $('#permissions')
+                .append($("<option></option>")
+                .attr("value", this.value)
+                .text(this.text));
+            $(this).remove();
+        });
+        ordernarPermisos();
+    });
+    $("#btnDeleteAll").click(function () {
+        $("#permissions > option").each(function () {
+            $('#permission_id')
+                .append($("<option></option>")
+                .attr("value", this.value)
+                .text(this.text));
+            $(this).remove();
+        });
+        ordernarPermisosId();
+    });
+    $("#btnDelete").click(function () {
+        $("#permissions > option:selected").each(function () {
+            $('#permission_id')
+                .append($("<option></option>")
+                .attr("value", this.value)
+                .text(this.text));
+            $(this).remove();
+        });
+        ordernarPermisosId();
+    });
+    function ordernarPermisos() {
+        // choose target dropdown
+        var select = $('#permissions');
+        select.html(select.find('option').sort(function (x, y) {
+            // to change to descending order switch "<" for ">"
+            return $(x).text() > $(y).text() ? 1 : -1;
+        }));
+        // select default item after sorting (first item)
+        // $('select').get(0).selectedIndex = 0;
+    }
+    function ordernarPermisosId() {
+        // choose target dropdown
+        var select = $('#permission_id');
+        select.html(select.find('option').sort(function (x, y) {
+            // to change to descending order switch "<" for ">"
+            return $(x).text() > $(y).text() ? 1 : -1;
+        }));
+
+        // select default item after sorting (first item)
+        // $('select').get(0).selectedIndex = 0;
+    }
+    $("#guardar").click(function () {
+        $('#permissions option').prop('selected', true);
+        $("#form").submit();
+    });
+</script>

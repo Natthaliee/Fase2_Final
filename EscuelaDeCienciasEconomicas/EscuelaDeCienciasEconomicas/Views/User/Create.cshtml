@@ -1,0 +1,164 @@
+﻿@model RaptorENEL_V._1._0.Models.User
+
+@{
+    ViewBag.ContentTitle = "USUARIOS";
+    ViewBag.SectionTitle = "AGREGAR INFORMACIÓN DE USUARIO";
+    ViewBag.breadcrumblist = "<li><a href='/User'><i class='fa fa-user' style='color: dodgerblue;'></i> Usuarios</a></li><li><a href='/User/Create'><i class='fa fa-plus' style='color: dodgerblue;'></i> Agregar</a></li>";
+    ViewBag.mnOptID = "optUsuarios";
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "show_modal" }) )
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="username">Nombre de usuario</label>
+            <div class="col-md-10 input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-user" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", placeholder = "Identificador de usuario" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.username, "", new { @class = "col-md-10 text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="password">Contraseña</label>            
+            <div class="col-md-10  input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-lock" style="color: #555555 !important;"></i>
+                </span>
+                @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Contraseña para inicio de sesión" })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "col-md-10 text-danger" })
+            <span class="col-md-2"></span>
+            <span class="col-md-10 desc">*La contraseña debe tener entre 8 y 15 carácteres.</span>
+            <span class="col-md-2"></span>
+            <br /><span class="col-md-10 desc">*La contraseña debe contener al menos 1 número, 1 mayúscula, 1 minúscula y un carácter especial.</span>
+        </div>
+
+        <h4>Información personal</h4>
+        <hr class="division" width="25%" />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="first_name">Nombres</label>
+            <div class="col-md-10  input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-address-card" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Primer y Segundo nombre" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "col-md-10 text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="last_name">Apellidos</label>
+            <div class="col-md-10  input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-address-card" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Primer y Segundo Apellido" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "col-md-10 text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="email">Correo electrónico</label>
+            <div class="col-md-10  input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-envelope" style="color: #555555 !important;"></i>
+                </span>
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder="ejemplo@dominio.com" } })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "col-md-10 text-danger" })
+        </div>
+
+        <h4>Permisos</h4>
+        <hr class="division" width="25%" />
+        
+        <div class="form-group">
+            <label class="control-label col-md-2" for="email">Rol</label>
+            <div class="col-md-10  input-group secondary">
+                <span class="input-group-addon">
+                    <span class="arrow"></span>
+                    <i class="fa fa-users" style="color: #555555 !important;"></i>
+                </span>
+                @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.role_id, "", new { @class = "col-md-10 text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="is_staff">Es staff</label>
+            <div class="col-md-10  input-group secondary">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.is_staff)
+                </div>
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.is_staff, "", new { @class = "col-md-10 text-danger" })
+            <span class="col-md-2"></span>
+            <span class="col-md-10 desc">Indica si el usuario puede entrar en este sitio de administración.</span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="is_active">Activo</label>
+            <div class="col-md-10  input-group secondary">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.is_active)
+                </div>
+            </div>
+            <span class="col-md-2"></span>
+            @Html.ValidationMessageFor(model => model.is_active, "", new { @class = "col-md-10 text-danger" })
+            <span class="col-md-2"></span>
+            <span class="col-md-10 desc">Indica si el usuario debe ser tratado como activo.</span>
+            <span class="col-md-2"></span>
+            <span class="col-md-10 desc">Desmarque esta opción en lugar de borrar la cuenta.</span>
+        </div>
+
+        <hr class="division" style="margin-bottom: 15px;" width="100%" />
+
+        <div class="col-xs-12 col-sm-9 col-md-8 padding-bottom-30">
+            <div class="text-left">
+                <a class="btn btn-secondary btn-icon bottom15 right15 show_modal" href="@Url.Action("Index","User")">
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="title">Regresar</span>
+                </a>
+
+                <button type="submit" class="btn btn-info btn-icon bottom15 right15">
+                    <i class="fa fa-floppy-o"></i> &nbsp; <span>Guardar</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+}
+
+<script>
+  $(function(){
+      var msg = "@(TempData["Msg"] as string)";
+      var msgErr = "@(TempData["MsgErr"] as string)";
+     if (msg !== "") {
+         toastr.success(msg);
+     }
+     if (msgErr !== "") {
+         toastr.error(msgErr);
+     }
+  });
+</script>
+

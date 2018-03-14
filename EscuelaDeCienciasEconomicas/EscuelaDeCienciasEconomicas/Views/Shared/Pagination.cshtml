@@ -1,0 +1,34 @@
+﻿<select id="grid-size" name="grid-size" aria-controls="example" class="form-control input-sm select2-wrapper" onchange="SelectedIndexChanged()">
+    @if (@Session["Paginacion"].ToString() == "10")
+    {
+        <option value="10" selected>10</option>
+    }
+    else
+    {
+        <option value="10">10</option>
+    }
+    @if (@Session["Paginacion"].ToString() == "25")
+    {
+        <option value="25" selected>25</option>
+    }
+    else
+    {
+        <option value="25">25</option>
+    }
+    @if (@Session["Paginacion"].ToString() == "50")
+    {
+        <option value="50" selected>50</option>
+    }
+    else
+    {
+        <option value="50">50</option>
+    }
+    @if (@Session["Paginacion"].ToString() == "100")
+    {
+        <option value="100" selected>100</option>
+    }
+    else
+    {
+        <option value="100">100</option>
+    }
+</select>

@@ -1,0 +1,13 @@
+﻿.grid-header {
+    vertical-align: middle !important;
+    font-size: 13px;
+    color: #757575 !important;
+    text-align: center;
+    border-right: 2px solid #eeeeee;
+    background: linear-gradient(var(--BkGrndColor1), var(--BkGrndColor2)) !important; 
+}
+
+.grid-header a, .grid-header a:hover {
+    color: #757575 !important;
+    text-decoration: none;
+}
