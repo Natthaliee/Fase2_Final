@@ -1,0 +1,46 @@
+﻿@model ModelBD.Curso
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="/css/bootstrap.css" rel="stylesheet" />
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/Scripts/toastr.js"></script>
+<link href="/Content/toastr.css" rel="stylesheet" />
+
+<h2>Details</h2>
+
+<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCurso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laboratorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laboratorio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCurso }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

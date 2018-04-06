@@ -16,6 +16,8 @@ namespace ModelBD
         public virtual DbSet<Jornada> Jornada { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Curso> Curso { get; set; }
+        public virtual DbSet<Notas> Notas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,9 +37,14 @@ namespace ModelBD
                 .Property(e => e.UserName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Usuario>()
-                .Property(e => e.UserPass)
-                .IsUnicode(false);
+            //modelBuilder.Entity<Notas>()
+            //    .Property(e => e.IdNota)
+            //.is(false);
+
+            modelBuilder.Entity<Curso>()
+                .Property(e => e.NombreCurso)
+            .IsUnicode(false);
+
         }
     }
 }

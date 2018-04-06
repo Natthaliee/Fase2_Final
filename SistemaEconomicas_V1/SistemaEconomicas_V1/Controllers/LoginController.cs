@@ -35,27 +35,26 @@ namespace SistemaEconomicas_V1.Controllers
             bool userExist = db.Usuario.Any(x => x.UserName == UserId);
                 if (!userExist)
                 {
-                    TempData["MsgErr"] = "El nombre de usuario o contraseña no son válidos";
+                    TempData["MsgErr"] = "El nombre de usuario no es válido";
                 }
                 else
                 {
-                    Usuario usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 1).SingleOrDefault();                    
+                    Usuario usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 1 && c.UserPass == PassId).SingleOrDefault();
                     if (usr == null) {
                         Session["Rolesss"] = "";
-                        usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 2).SingleOrDefault();                        
+                        usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 2 && c.UserPass == PassId).SingleOrDefault();                        
                             if (usr == null)
                             {
                                 Session["Rolesss"] = "";
-                                usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 3).SingleOrDefault();                                
-                                    if (usr == null)
-                                    {
-                                    TempData["MsgErr"] = "El nombre de usuario o contraseña no son válidos";
-                                    }
-                                    else
+                                usr = db.Usuario.Where(c => c.UserName == UserId && c.RolId == 3 && c.UserPass == PassId).SingleOrDefault();                                
+                                    if (usr != null)
                                     {
                                         Session["Rolesss"] = "Catedratico";
-                                         flagLogin = true;
-                            }
+                                        flagLogin = true;
+                                    }else
+                                    {
+                                    TempData["MsgErr"] = "La contraseña es inválida";
+                                    }
                             }
                             else
                             {
@@ -68,9 +67,10 @@ namespace SistemaEconomicas_V1.Controllers
                         flagLogin = true;
                     }
                 }
-               
+
+
                 PassId = "";
-                if(flagLogin)
+                if (flagLogin)
                 {
                     flagLogin = false;
 
@@ -83,10 +83,10 @@ namespace SistemaEconomicas_V1.Controllers
                     flagLogin = false;
                     return View();
                 }
-                
-                
+
+
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }

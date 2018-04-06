@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Escuela de Ciencias Economicas</title>
     <link href="/css/bootstrap.css" rel="stylesheet" />
-    <script src="/js/jquery-1.10.2.js"></script>
+    <script src="/Scripts/jquery-1.9.0.js"></script>
     <script src="/Scripts/toastr.js"></script>
     <link href="/Content/toastr.css" rel="stylesheet" />
     <style type="text/css">
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12 input-group secondary">
                                         <br />
-                                        <input name="PassId" class="form-control" id="PassId" type="text" placeholder="Contraseña" />
+                                        <input name="PassId" class="form-control" id="PassId" type="password" placeholder="Contraseña" />
                                     </div>
                                 </div>
 
@@ -100,12 +100,15 @@
 
         </div>
     }
+    
 
     <script>
         $(function(){
-            var msg = "@(TempData["MsgErr"] as string)";
+            var msg = "@(TempData["MsgErr"] as string)";   
             if (msg !== "") {
                 toastr.error(msg);
+                toastr.options.progressBar.error(msg);
+                //toastr.success(msg);
             }
         });
     </script>

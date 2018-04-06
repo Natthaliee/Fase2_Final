@@ -1,0 +1,69 @@
+﻿@model ModelBD.Notas
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="/css/bootstrap.css" rel="stylesheet" />
+<script src="/js/jquery-1.10.2.js"></script>
+<script src="/Scripts/toastr.js"></script>
+<link href="/Content/toastr.css" rel="stylesheet" />
+<h2>Details</h2>
+
+<div>
+    <h4>Notas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEstudiante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdEstudiante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCurso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laboratorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laboratorio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Final)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Final)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCatedratico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCatedratico)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdNota }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
