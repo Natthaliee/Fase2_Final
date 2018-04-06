@@ -17,6 +17,7 @@ namespace SistemaEconomicas_V1.Controllers
         // GET: Jornadas
         public ActionResult Index()
         {
+            //se retorna la lista de jornadas
             return View(db.Jornada.ToList());
         }
 
