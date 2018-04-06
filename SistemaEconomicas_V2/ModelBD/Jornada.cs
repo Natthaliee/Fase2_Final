@@ -12,6 +12,7 @@ namespace ModelBD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Jornada()
         {
+            //se crea la instancia de usuario
             Usuario = new HashSet<Usuario>();
         }
 
