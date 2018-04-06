@@ -17,14 +17,17 @@ namespace SistemaEconomicas_V1.Controllers
         // GET: Carreras
         public ActionResult Index()
         {
+            //aqui se obtiene la lista de carreras
             return View(db.Carrera.ToList());
         }
 
         // GET: Carreras/Details/5
         public ActionResult Details(int? id)
         {
+            //si el id es null
             if (id == null)
             {
+                //retornamos el bad request
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Carrera carrera = db.Carrera.Find(id);

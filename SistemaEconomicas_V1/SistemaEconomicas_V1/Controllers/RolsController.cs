@@ -28,6 +28,7 @@ namespace SistemaEconomicas_V1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Rol rol = db.Rol.Find(id);
+            //se crea la instancia de rol
             if (rol == null)
             {
                 return HttpNotFound();
