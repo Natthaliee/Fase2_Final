@@ -12,6 +12,7 @@ namespace ModelBD
         {
         }
 
+
         public virtual DbSet<Carrera> Carrera { get; set; }
         public virtual DbSet<Jornada> Jornada { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }

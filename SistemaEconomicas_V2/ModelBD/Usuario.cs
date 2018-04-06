@@ -12,6 +12,7 @@ namespace ModelBD
     {
         private TestContext context = new TestContext();
 
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
